@@ -1,14 +1,14 @@
 import cv2
-import numpy as np
 
-net = cv2.dnn.readNet('yolov3.weights', 'yolov3.cfg')
-classes = []
-with open('coco.names', 'r') as f:
-    classes = f.read().splitlines()
+cap = cv2.VideoCapture()
 
-img = cv2.imread('image.jpg')
-height, width, _= img.shape
+while True:
+    _, frame = cap.read()
 
-cv2.imshow('Image', img)
-cv2.waitKey(0)
+    cv2.imshow("detections", frame)
+
+    if cv2.waitKey(1) == 27:
+        break
+
+cap.release()
 cv2.destroyAllWindows()
