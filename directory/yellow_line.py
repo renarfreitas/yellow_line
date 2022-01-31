@@ -1,8 +1,23 @@
 import cv2
-cap = cv2.VideoCapture(0)
+import os
+
+USERNAME = 'admin'
+PASSWORD = 'admin'
+IP = '192.168.1.107:8081'
+PORT = '554'
+
+os.environ["OPENCV_FFMPEG_CAPTURE_OPTIONS"] = "rtsp_transport;udp"
+
+URL = 'https//{}:{}@{}/'.format(USERNAME, PASSWORD, IP, PORT)
+print('Conectado com: ' + URL)
+
+cap = cv2.VideoCapture(URL, cv2.CAP_FFMPEG)
+
 faceCascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
 eyesCascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_eye.xml')
 smileCascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_smile.xml')
+
+
 
 while True:
     _, frame = cap.read()
